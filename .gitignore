@@ -1,0 +1,13 @@
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribuição
+dist/
+build/
+*.egg-info/

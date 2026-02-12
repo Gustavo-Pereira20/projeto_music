@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br" style="background-color: #0a0a0a;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - MusicTube</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Força o fundo escuro em toda a página, independente do conteúdo */
+        html, body { 
+            background-color: #0a0a0a !important; 
+            color: #fff; 
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        body { padding: 40px 10px; }
+        
+        .box { background-color: #1a1a1a; border: 1px solid #2d2d2d; color: #fff; }
+        .input, .select select { background-color: #2d2d2d; border-color: #3d3d3d; color: #fff; }
+        .input:focus, .select select:focus { border-color: #485fc7; }
+        
+        /* Ajustes da Tabela */
+        .table { background-color: transparent; color: #fff; }
+        .table thead th { color: #7a7a7a; border-bottom-color: #2d2d2d; text-transform: uppercase; font-size: 0.75rem; }
+        .table td { border-bottom-color: #2d2d2d; vertical-align: middle; }
+        tr:hover { background-color: #242424 !important; }
+        
+        .title, .label { color: #fff !important; }
+        .subtitle { color: #485fc7 !important; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="level mb-6">
+            <div class="level-left">
+                <div>
+                    <h1 class="title is-3">Gestão de Conteúdo</h1>
+                    <p class="subtitle is-6">Painel Administrativo</p>
+                </div>
+            </div>
+            <div class="level-right">
+                <a href="/" class="button is-dark">
+                    <i class="fa-solid fa-house mr-2"></i> Voltar para o site
+                </a>
+            </div>
+        </header>
+
+        <div class="box">
+            <h2 class="title is-5 mb-5">
+                <i class="fa-solid fa-circle-plus has-text-success mr-2"></i> Nova Música
+            </h2>
+            <form>
+                <div class="columns is-multiline">
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label is-small">Título da Música</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Ex: Starboy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label is-small">Cantor / Banda</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Ex: The Weeknd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label is-small">Duração</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Ex: 03:50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-8">
+                        <div class="field">
+                            <label class="label is-small">URL da Imagem de Capa</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="https://...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label is-small">Categoria</label>
+                            <div class="control is-expanded">
+                                <div class="select is-fullwidth">
+                                    <select>
+                                        <option>Selecione...</option>
+                                        <option>Rock</option>
+                                        <option>Pop</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="button is-link is-fullwidth mt-4">
+                    <strong><i class="fa-solid fa-save mr-2"></i> Salvar Música</strong>
+                </button>
+            </form>
+        </div>
+
+        <div class="box p-0" style="overflow-x: auto; border-radius: 6px;">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th class="has-text-centered">ID</th>
+                        <th>Capa</th>
+                        <th>Título / Cantor</th>
+                        <th class="has-text-centered">Duração</th>
+                        <th>Categoria</th>
+                        <th class="has-text-centered">Status</th>
+                        <th class="has-text-right px-5">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="has-text-centered has-text-link is-family-monospace">1</td>
+                        <td style="width: 80px;">
+                            <figure class="image is-48x48">
+                                <img src="https://via.placeholder.com/48" class="is-rounded" style="object-fit: cover;">
+                            </figure>
+                        </td>
+                        <td>
+                            <strong class="has-text-white">Título da Música</strong><br>
+                            <small class="has-text-grey">Nome do Cantor</small>
+                        </td>
+                        <td class="is-family-monospace has-text-centered">04:12</td>
+                        <td><span class="tag is-dark">Rock</span></td>
+                        <td class="has-text-centered">
+                            <span class="tag is-success is-light">ATIVO</span>
+                        </td>
+                        <td class="has-text-right px-5">
+                            <div class="buttons is-right">
+                                <button class="button is-small is-warning is-light" title="Desativar">
+                                    <i class="fa-solid fa-eye-slash"></i>
+                                </button>
+                                <button class="button is-small is-danger is-light" title="Excluir">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

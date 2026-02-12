@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicTube - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #0a0a0a; color: #fff; min-height: 100vh; padding-top: 3.25rem; }
+        .navbar { background-color: #1a1a1a; border-bottom: 1px solid #2d2d2d; }
+        .navbar-item, .navbar-link { color: #fff !important; }
+        .input { background-color: #2d2d2d; border-color: #3d3d3d; color: #fff; }
+        .input::placeholder { color: #888; }
+        
+        /* Ajuste nos Títulos para não sobrepor */
+        .music-title { color: #fff; font-weight: 600; line-height: 1.2; margin-bottom: 4px !important; display: block; }
+        .music-singer { color: #b5b5b5; font-size: 0.85rem; margin-bottom: 12px !important; display: block; }
+        
+        .music-card { 
+            background-color: #1a1a1a;
+            border: 1px solid #2d2d2d; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .music-card:hover { border-color: #4a4a4a; background-color: #222; }
+        .card-image img { aspect-ratio: 16/9; object-fit: cover; width: 100%; }
+        
+        .menu-label { color: #7a7a7a; padding-left: 10px; }
+        .menu-list a { color: #b5b5b5; }
+        .menu-list a:hover { background-color: #2d2d2d; color: #fff; }
+        .icon-youtube {color:red}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container is-fluid">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <i class="fa-brands fa-youtube icon-youtube is-size-3 mr-2"></i>
+                    <strong class="has-text-white is-size-4">MusicTube</strong>
+                </a>
+            </div>
+
+            <div class="navbar-menu">
+                <div class="navbar-end" style="flex-grow: 1; justify-content: center; display: flex; align-items: center;">
+                    <div class="field has-addons" style="width: 50%;">
+                        <div class="control is-expanded">
+                            <input class="input is-rounded" type="text" placeholder="Pesquisar músicas...">
+                        </div>
+                        <div class="control">
+                            <button class="button is-dark is-rounded">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a href="/admin" class="button is-link">
+                            <i class="fa-solid fa-user-shield mr-2"></i> Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="section">
+        <div class="columns">
+            <aside class="column is-2 is-hidden-mobile">
+                <div class="menu">
+                    <p class="menu-label">Categorias</p>
+                    <ul class="menu-list">
+                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span> Rock</a></li>
+                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span> Pop</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="column">
+                <div class="columns is-multiline">
+                    
+                    <div class="column is-12-mobile is-6-tablet is-4-desktop is-3-widescreen">
+                        <div class="music-card">
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800" alt="Capa">
+                                </figure>
+                            </div>
+                            <div class="card-content p-4">
+                                <span class="music-title is-size-6">Título da Música de Exemplo</span>
+                                <span class="music-singer">
+                                    <i class="fa-solid fa-microphone-lines mr-1"></i> Nome do Cantor
+                                </span>
+                                
+                                <div class="tags flex justify-between">
+                                    <span class="tag is-dark">Categoria</span>
+                                    <span class="tag is-black has-text-grey-light is-family-monospace">03:45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
