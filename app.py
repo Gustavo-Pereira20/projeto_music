@@ -19,9 +19,9 @@ def pagina_index():
 
     cursor.execute("SELECT codigo, cantor, duracao, nome_musica, caminho_capa, nome_genero FROM musica")
 
-    cursor.fetchall()
+    musicas = cursor.fetchall()
 
-    musicas = cursor.close()
+    cursor.close()
 
     return render_template("/principal.html", musicas = musicas)
 
