@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import mysql.connector
+from model.musica import recuperar_musicas
+from model.genero import recuperar_generos
 
 app = Flask(__name__)
 
@@ -7,27 +9,30 @@ app = Flask(__name__)
 
 def pagina_index():
 
-    conexao = mysql.connector.connect(
-        host = "localhost",
-        port = 3306,
-        user = "root",
-        password = "root",
-        database = "bcd_musica"
-    )
+    musicas = recuperar_musicas()
+    genero = recuperar_generos()
 
-    cursor = conexao.cursor(dictionary=True)
-
-    cursor.execute("SELECT codigo, cantor, duracao, nome_musica, caminho_capa, nome_genero FROM musica")
-
-    musicas = cursor.fetchall()
-
-    cursor.close()
-
-    return render_template("/principal.html", musicas = musicas)
+    return render_template("/principal.html", musicas = musicas, genero = genero)
 
 @app.route("/adm")
 
 def pagina_adm():
-    return render_template("/administracao.html")
+
+    musicas = recuperar_musicas()
+    genero = recuperar_generos()
+
+    return render_template("/administracao.html", musicas = musicas, genero = genero)
+
+@app.route("/adm", methods = ["POST"])
+
+def pagina_post():
+    musica = request.form.get("musica")
+    cantor = request.form.get("cantor")
+    duracao = request.form.get("duracao")
+    url_capa = request.form.get("url_capa")
+    categoria = request.form.get("categoria")
+    print(musica, cantor, duracao, url_capa, categoria)
+    
+    return redirect("/adm")
 
 app.run(debug=True)

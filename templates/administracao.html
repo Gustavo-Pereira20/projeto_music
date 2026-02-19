@@ -47,18 +47,17 @@
                 </a>
             </div>
         </header>
-
         <div class="box">
             <h2 class="title is-5 mb-5">
                 <i class="fa-solid fa-circle-plus has-text-success mr-2"></i> Nova Música
             </h2>
-            <form>
+            <form action="/adm" method="POST">
                 <div class="columns is-multiline">
                     <div class="column is-4">
                         <div class="field">
                             <label class="label is-small">Título da Música</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Ex: Starboy">
+                                <input class="input" type="text" placeholder="Ex: Starboy" name="musica">
                             </div>
                         </div>
                     </div>
@@ -66,7 +65,7 @@
                         <div class="field">
                             <label class="label is-small">Cantor / Banda</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Ex: The Weeknd">
+                                <input class="input" type="text" placeholder="Ex: The Weeknd" name="cantor">
                             </div>
                         </div>
                     </div>
@@ -74,7 +73,7 @@
                         <div class="field">
                             <label class="label is-small">Duração</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Ex: 03:50">
+                                <input class="input" type="text" placeholder="Ex: 03:50" name="duracao">
                             </div>
                         </div>
                     </div>
@@ -82,7 +81,7 @@
                         <div class="field">
                             <label class="label is-small">URL da Imagem de Capa</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="https://...">
+                                <input class="input" type="text" placeholder="https://..." name="url_capa">
                             </div>
                         </div>
                     </div>
@@ -91,10 +90,11 @@
                             <label class="label is-small">Categoria</label>
                             <div class="control is-expanded">
                                 <div class="select is-fullwidth">
-                                    <select>
+                                    <select name="categoria">
                                         <option>Selecione...</option>
-                                        <option>Rock</option>
-                                        <option>Pop</option>
+                                        {% for categoria in genero %}
+                                            <option>{{categoria.nome_genero}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -106,7 +106,6 @@
                 </button>
             </form>
         </div>
-
         <div class="box p-0" style="overflow-x: auto; border-radius: 6px;">
             <table class="table is-fullwidth">
                 <thead>
@@ -121,33 +120,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="has-text-centered has-text-link is-family-monospace">1</td>
-                        <td style="width: 80px;">
-                            <figure class="image is-48x48">
-                                <img src="https://via.placeholder.com/48" class="is-rounded" style="object-fit: cover;">
-                            </figure>
-                        </td>
-                        <td>
-                            <strong class="has-text-white">Título da Música</strong><br>
-                            <small class="has-text-grey">Nome do Cantor</small>
-                        </td>
-                        <td class="is-family-monospace has-text-centered">04:12</td>
-                        <td><span class="tag is-dark">Rock</span></td>
-                        <td class="has-text-centered">
-                            <span class="tag is-success is-light">ATIVO</span>
-                        </td>
-                        <td class="has-text-right px-5">
-                            <div class="buttons is-right">
-                                <button class="button is-small is-warning is-light" title="Desativar">
-                                    <i class="fa-solid fa-eye-slash"></i>
-                                </button>
-                                <button class="button is-small is-danger is-light" title="Excluir">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    {% for musica in musicas %}
+                        <tr>
+                            <td class="has-text-centered has-text-link is-family-monospace">1</td>
+                            <td style="width: 80px;">
+                                <figure class="image is-48x48">
+                                    <img src="{{musica.caminho_capa}}" class="is-rounded" style="object-fit: cover;">
+                                </figure>
+                            </td>
+                            <td>
+                                <strong class="has-text-white">{{musica.nome_musica}}</strong><br>
+                                <small class="has-text-grey">{{musica.cantor}}</small>
+                            </td>
+                            <td class="is-family-monospace has-text-centered">{{musica.duracao}}</td>
+                            <td><span class="tag is-dark">{{musica.nome_genero}}</span></td>
+                            <td class="has-text-centered">
+                                <span class="tag is-success is-light">ATIVO</span>
+                            </td>
+                            <td class="has-text-right px-5">
+                                <div class="buttons is-right">
+                                    <button class="button is-small is-warning is-light" title="Desativar">
+                                        <i class="fa-solid fa-eye-slash"></i>
+                                    </button>
+                                    <button class="button is-small is-danger is-light" title="Excluir">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

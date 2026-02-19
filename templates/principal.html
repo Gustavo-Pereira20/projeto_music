@@ -62,7 +62,7 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <a href="/admin" class="button is-link">
+                        <a href="/adm" class="button is-link">
                             <i class="fa-solid fa-user-shield mr-2"></i> Admin
                         </a>
                     </div>
@@ -77,8 +77,9 @@
                 <div class="menu">
                     <p class="menu-label">Categorias</p>
                     <ul class="menu-list">
-                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span> Rock</a></li>
-                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span> Pop</a></li>
+                        {% for categoria in genero %}
+                            <li ><a href="#" style="color: {{categoria.cor}}"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span>{{categoria.nome_genero}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </aside>
