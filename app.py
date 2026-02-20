@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import mysql.connector
-from model.musica import recuperar_musicas
+from model.musica import recuperar_musicas, enviar_musica
 from model.genero import recuperar_generos
 
 app = Flask(__name__)
@@ -26,12 +26,14 @@ def pagina_adm():
 @app.route("/adm", methods = ["POST"])
 
 def pagina_post():
+    
     musica = request.form.get("musica")
     cantor = request.form.get("cantor")
     duracao = request.form.get("duracao")
     url_capa = request.form.get("url_capa")
     categoria = request.form.get("categoria")
-    print(musica, cantor, duracao, url_capa, categoria)
+
+    enviar_musica(cantor, duracao, musica, url_capa, categoria)
     
     return redirect("/adm")
 
