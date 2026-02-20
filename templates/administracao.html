@@ -51,7 +51,7 @@
             <h2 class="title is-5 mb-5">
                 <i class="fa-solid fa-circle-plus has-text-success mr-2"></i> Nova Música
             </h2>
-            <form action="/adm" method="POST">
+            <form action="/musica/post" method="POST">
                 <div class="columns is-multiline">
                     <div class="column is-4">
                         <div class="field">
@@ -93,7 +93,7 @@
                                     <select name="categoria">
                                         <option>Selecione...</option>
                                         {% for categoria in genero %}
-                                            <option>{{categoria.nome_genero}}</option>
+                                            <option value="{{categoria.nome_genero}}">{{categoria.nome_genero}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="button is-link is-fullwidth mt-4">
+                <button type="submit" class="button is-link is-fullwidth mt-4">
                     <strong><i class="fa-solid fa-save mr-2"></i> Salvar Música</strong>
                 </button>
             </form>

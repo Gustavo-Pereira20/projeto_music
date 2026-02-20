@@ -23,18 +23,19 @@ def pagina_adm():
 
     return render_template("/administracao.html", musicas = musicas, genero = genero)
 
-@app.route("/adm", methods = ["POST"])
+@app.route("/musica/post", methods = ["POST"])
 
-def pagina_post():
+def api_inserir_musica():
     
     musica = request.form.get("musica")
     cantor = request.form.get("cantor")
     duracao = request.form.get("duracao")
     url_capa = request.form.get("url_capa")
     categoria = request.form.get("categoria")
-
-    enviar_musica(cantor, duracao, musica, url_capa, categoria)
     
-    return redirect("/adm")
+    if enviar_musica(cantor, duracao, musica, url_capa, categoria):
+        return redirect("/adm")
+    else:
+        return "erro"
 
 app.run(debug=True)

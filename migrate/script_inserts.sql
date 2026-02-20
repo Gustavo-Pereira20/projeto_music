@@ -32,7 +32,7 @@ VALUES
 "Brandão",
 "0:02:28",
 "MIGOS",
-"https://i.scdn.co/image/ab67616d0000b27351f1bdb15406e4706081c00d")
+"https://i.scdn.co/image/ab67616d0000b27351f1bdb15406e4706081c00d"),
 
 ("Trap",
 "Alee",
