@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" style="background-color: #0a0a0a;">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +9,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Força o fundo escuro em toda a página, independente do conteúdo */
-        html, body { 
-            background-color: #0a0a0a !important; 
-            color: #fff; 
+        html,
+        body {
+            background-color: #0a0a0a !important;
+            color: #fff;
             min-height: 100vh;
             margin: 0;
         }
-        
-        body { padding: 40px 10px; }
-        
-        .box { background-color: #1a1a1a; border: 1px solid #2d2d2d; color: #fff; }
-        .input, .select select { background-color: #2d2d2d; border-color: #3d3d3d; color: #fff; }
-        .input:focus, .select select:focus { border-color: #485fc7; }
-        
+
+        body {
+            padding: 40px 10px;
+        }
+
+        .box {
+            background-color: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            color: #fff;
+        }
+
+        .input,
+        .select select {
+            background-color: #2d2d2d;
+            border-color: #3d3d3d;
+            color: #fff;
+        }
+
+        .input:focus,
+        .select select:focus {
+            border-color: #485fc7;
+        }
+
         /* Ajustes da Tabela */
-        .table { background-color: transparent; color: #fff; }
-        .table thead th { color: #7a7a7a; border-bottom-color: #2d2d2d; text-transform: uppercase; font-size: 0.75rem; }
-        .table td { border-bottom-color: #2d2d2d; vertical-align: middle; }
-        tr:hover { background-color: #242424 !important; }
-        
-        .title, .label { color: #fff !important; }
-        .subtitle { color: #485fc7 !important; }
+        .table {
+            background-color: transparent;
+            color: #fff;
+        }
+
+        .table thead th {
+            color: #7a7a7a;
+            border-bottom-color: #2d2d2d;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .table td {
+            border-bottom-color: #2d2d2d;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background-color: #242424 !important;
+        }
+
+        .title,
+        .label {
+            color: #fff !important;
+        }
+
+        .subtitle {
+            color: #485fc7 !important;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -51,7 +92,7 @@
             <h2 class="title is-5 mb-5">
                 <i class="fa-solid fa-circle-plus has-text-success mr-2"></i> Nova Música
             </h2>
-            <form action="/musica/post" method="POST">
+            <form action="/adm/post" method="POST">
                 <div class="columns is-multiline">
                     <div class="column is-4">
                         <div class="field">
@@ -93,7 +134,7 @@
                                     <select name="categoria">
                                         <option>Selecione...</option>
                                         {% for categoria in genero %}
-                                            <option value="{{categoria.nome_genero}}">{{categoria.nome_genero}}</option>
+                                        <option value="{{categoria.nome_genero}}">{{categoria.nome_genero}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -121,33 +162,45 @@
                 </thead>
                 <tbody>
                     {% for musica in musicas %}
-                        <tr>
-                            <td class="has-text-centered has-text-link is-family-monospace">1</td>
-                            <td style="width: 80px;">
-                                <figure class="image is-48x48">
-                                    <img src="{{musica.caminho_capa}}" class="is-rounded" style="object-fit: cover;">
-                                </figure>
-                            </td>
-                            <td>
-                                <strong class="has-text-white">{{musica.nome_musica}}</strong><br>
-                                <small class="has-text-grey">{{musica.cantor}}</small>
-                            </td>
-                            <td class="is-family-monospace has-text-centered">{{musica.duracao}}</td>
-                            <td><span class="tag is-dark">{{musica.nome_genero}}</span></td>
-                            <td class="has-text-centered">
-                                <span class="tag is-success is-light">ATIVO</span>
-                            </td>
-                            <td class="has-text-right px-5">
-                                <div class="buttons is-right">
+                    <tr>
+                        <td class="has-text-centered has-text-link is-family-monospace">{{loop.index}}</td>
+                        <td style="width: 80px;">
+                            <figure class="image is-48x48">
+                                <img src="{{musica.caminho_capa}}" class="is-rounded" style="object-fit: cover;">
+                            </figure>
+                        </td>
+                        <td>
+                            <strong class="has-text-white">{{musica.nome_musica}}</strong><br>
+                            <small class="has-text-grey">{{musica.cantor}}</small>
+                        </td>
+                        <td class="is-family-monospace has-text-centered">{{musica.duracao}}</td>
+                        <td><span class="tag is-dark">{{musica.nome_genero}}</span></td>
+                        <td class="has-text-centered">
+                            {% if musica.atividade == "ATIVO" %}
+                            <span class="tag is-success is-light">{{musica.atividade}}</span>
+                            {% else %}
+                            <span class="tag is-danger is-light">{{musica.atividade}}</span>
+                            {% endif %}
+                        </td>
+                        <td class="has-text-right px-5">
+                            <div class="buttons is-right">
+                                <a href="/adm/atividade/{{musica.codigo}}/{{musica.atividade}}">
                                     <button class="button is-small is-warning is-light" title="Desativar">
+                                        {% if musica.atividade == "ATIVO" %}
                                         <i class="fa-solid fa-eye-slash"></i>
-                                    </button>
+                                        {% else %}
+                                        <i class="fa-solid fa-eye"></i>
+                                        {% endif %}
+                                    </button></a>
+
+                                <a href="/adm/delete/{{musica.codigo}}">
                                     <button class="button is-small is-danger is-light" title="Excluir">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
-                                </div>
-                            </td>
-                        </tr>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -155,4 +208,5 @@
     </div>
 
 </body>
+
 </html>
