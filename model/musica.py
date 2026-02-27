@@ -1,14 +1,22 @@
 from database.conexao import conectar
 
-def recuperar_musicas():
+def recuperar_musicas(ativos:bool, filtro:None):
     conexao, cursor = conectar()
-
-    cursor.execute("SELECT codigo, cantor, duracao, atividade, nome_musica, caminho_capa, nome_genero FROM musica ORDER BY atividade")
-    musicas = cursor.fetchall()
-
-    conexao.close()
-
-    return musicas
+    if ativos:
+        cursor.execute("SELECT codigo, cantor, duracao, atividade, nome_musica, caminho_capa, nome_genero FROM musica WHERE atividade = %s", (ativos,))
+        musicas = cursor.fetchall()
+        conexao.close()
+        return musicas
+    elif filtro:
+        cursor.execute("SELECT codigo, cantor, duracao, atividade, nome_musica, caminho_capa, nome_genero FROM musica WHERE nome_genero = %s AND atividade = 1", (filtro,))
+        musicas = cursor.fetchall()
+        conexao.close()
+        return musicas
+    else:
+        cursor.execute("SELECT codigo, cantor, duracao, atividade, nome_musica, caminho_capa, nome_genero FROM musica ORDER BY atividade DESC")
+        musicas = cursor.fetchall()
+        conexao.close()
+        return musicas
 
 def enviar_musica(a:str,b:str,c:str,d:str,e:str, f:str) -> bool:
     """Faz o envio dos dados formatados ao banco de dados e insere."""
@@ -47,8 +55,9 @@ def ativo_inativo(a:int, b:int) -> bool:
 
     try:
         conexao, cursor = conectar()
-
-        status_atual = "INATIVO" if a == "ATIVO" else "ATIVO"
+        
+        a = int(a)
+        status_atual = 0 if a == 1 else 1
 
         cursor.execute("UPDATE musica SET atividade = %s WHERE codigo = %s", (status_atual,b))
 
