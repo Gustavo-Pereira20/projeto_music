@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS musica (
  codigo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
  cantor VARCHAR(50),
  duracao TIME,
- atividade VARCHAR(20),
+ atividade BOOLEAN,
  nome_musica VARCHAR(50),
  caminho_capa VARCHAR(255),
  nome_genero VARCHAR(50),
