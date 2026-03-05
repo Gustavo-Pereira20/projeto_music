@@ -1,15 +1,18 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 from model.musica import recuperar_musicas, enviar_musica, excluir_musica, ativo_inativo
 from model.genero import recuperar_generos
+from model.usuarios import adicionar_usuarios, consulta_db
 
 app = Flask(__name__)
+
+app.secret_key = 'megamats'
 
 @app.route("/")
 
 def pagina_index():
 
-    musicas = recuperar_musicas(1,0)
+    musicas = recuperar_musicas(True,0)
     genero = recuperar_generos()
 
     return render_template("/principal.html", musicas = musicas, genero = genero)
@@ -22,6 +25,22 @@ def api_filtrar_musica(nome_genero):
 
     return render_template("/principal.html", musicas = musicas, genero = genero)
 
+@app.route("/login")
+
+def pagina_login():
+    return render_template("/login.html")
+
+@app.route("/login/post", methods=["POST"])
+
+def pagina_login_post():
+    usuario = request.form.get("usuario")
+    senha = request.form.get("senha")
+    if consulta_db(usuario, senha):
+        session['usuario_logado'] = usuario
+        return redirect("/adm")
+    else:
+        return ("/login")
+    
 @app.route("/adm")
 
 def pagina_adm():
@@ -29,7 +48,11 @@ def pagina_adm():
     musicas = recuperar_musicas(0,0)
     genero = recuperar_generos()
 
-    return render_template("/administracao.html", musicas = musicas, genero = genero)
+    if 'usuario_logado' in session:
+        return render_template("/administracao.html", musicas = musicas, genero = genero)
+    else:
+        return redirect("/login")
+    
 
 @app.route("/adm/post", methods = ["POST"])
 
@@ -62,5 +85,26 @@ def api_atividade_musica(codigo, atividade):
         return redirect("/adm")
     else:
         return "erro"
+    
+@app.route("/cadastro")
 
+def pagina_cadastro():
+    return render_template("/cadastro.html")
+
+@app.route("/cadastro/post", methods=["POST"])
+
+def pagina_cadastro_post():
+    usuario = request.form.get("usuario")
+    senha = request.form.get("senha")
+    senha2 = request.form.get("senha2")
+    if senha != senha2:
+        return redirect("/cadastro")
+    else:
+        if adicionar_usuarios(usuario, senha):
+            return redirect("/")
+        else:
+            return "erro"
+
+
+    
 app.run(debug=True)

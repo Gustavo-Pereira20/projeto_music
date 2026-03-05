@@ -69,9 +69,6 @@
         .subtitle {
             color: #485fc7 !important;
         }
-        .cell{
-            margin: 10px 0;
-        }
     </style>
 </head>
 
@@ -93,39 +90,31 @@
         </header>
         <div class="box">
             <h2 class="title is-5 mb-5">
-                <i class="fa-solid fa-circle-plus has-text-success mr-2"></i> Página de Cadastro
+                <i class="fa-solid fa-circle-plus has-text-success mr-2"></i> Página de Login
             </h2>
-            <form action="/cadastro/post" method="POST">
-                <div class="grid">
-                    <div class="cell">
+            <form action="/login/post" method="POST">
+                <div class="columns is-auto">
+                    <div class="column is-6">
                         <div class="field">
                             <label class="label is-small">Usuário</label>
                             <div class="control">
-                                <input class="input" type="text" name="usuario" required>
+                                <input class="input" type="text" name="usuario">
                             </div>
                         </div>
                     </div>
-                    <div class="cell">
+                    <div class="column is-6">
                         <div class="field">
                             <label class="label is-small">Senha</label>
                             <div class="control">
-                                <input class="input" type="password" name="senha" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <div class="field">
-                            <label class="label is-small">Confirmar Senha</label>
-                            <div class="control">
-                                <input class="input" type="password" name="senha2" required>
+                                <input class="input" type="password" name="senha">
                             </div>
                         </div>
                     </div>
                 </div>
                 <button type="submit" class="button is-link is-fullwidth mt-4">
-                    <strong><i></i>Cadastrar</strong>
+                    <strong><i></i>Logar</strong>
                 </button>
-                <a href="/login">Já tem uma conta? Entre aqui!</a>
+                <a href="/cadastro">Não tem uma conta? Cadastre aqui!</a>
             </form>
 </body>
 
