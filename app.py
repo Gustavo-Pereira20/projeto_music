@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 from model.musica import recuperar_musicas, enviar_musica, excluir_musica, ativo_inativo
 from model.genero import recuperar_generos
-from model.usuarios import adicionar_usuarios, consulta_db
+from model.usuario import adicionar_usuarios, consulta_db
 
 app = Flask(__name__)
 
@@ -39,7 +39,7 @@ def pagina_login_post():
         session['usuario_logado'] = usuario
         return redirect("/adm")
     else:
-        return ("/login")
+        return redirect("/login")
     
 @app.route("/adm")
 
@@ -105,6 +105,10 @@ def pagina_cadastro_post():
         else:
             return "erro"
 
+@app.route("/logout")
 
+def logout_post():
+    session.pop('usuario_logado', default=None)
+    return redirect("/")
     
 app.run(debug=True)
