@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, flash
 import mysql.connector
 from model.musica import recuperar_musicas, enviar_musica, excluir_musica, ativo_inativo
 from model.genero import recuperar_generos
@@ -37,8 +37,10 @@ def pagina_login_post():
     senha = request.form.get("senha")
     if consulta_db(usuario, senha):
         session['usuario_logado'] = usuario
+        flash(f"Seja bem-vindo {usuario}!")
         return redirect("/adm")
     else:
+        flash("Usuário ou senha inválida")
         return redirect("/login")
     
 @app.route("/adm")

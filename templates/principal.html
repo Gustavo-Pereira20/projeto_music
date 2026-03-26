@@ -33,6 +33,7 @@
         .menu-list a { color: #b5b5b5; }
         .menu-list a:hover { background-color: #2d2d2d; color: #fff; }
         .icon-youtube {color:rgb(183, 0, 255)}
+        .user { padding: 8px 20px; border-radius: 5px; color: white; margin-right: 5px;}
     </style>
 </head>
 <body>
@@ -62,12 +63,13 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
+                        {% if session %} 
+                            <div class="user">{{session['usuario_logado']}}</div>
+                        {% endif %}
                         <a href="/adm" class="button is-link">
                             <i class="fa-solid fa-user-shield mr-2"></i>Admin
                         </a>
-                        <a href="/logout" class="button is-link ml-2">
-                            Logout
-                        </a>
+                        
                     </div>
                 </div>
             </div>

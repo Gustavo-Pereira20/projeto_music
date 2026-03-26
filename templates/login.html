@@ -73,7 +73,15 @@
 </head>
 
 <body>
-
+    <div>
+    {% with mensagens = get_flashed_messages() %}
+        {% for mensagem in mensagens %}
+        <h3>
+            {{mensagem}}
+        </h3>
+        {% endfor %}
+    {% endwith %}
+    </div>
     <div class="container">
         <header class="level mb-6">
             <div class="level-left">
